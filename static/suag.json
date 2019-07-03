@@ -1,0 +1,176 @@
+{
+  "swagger" : "2.0",
+  "host" : "suag-api.herokuapp.com",
+  "basePath" : "/",
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/streamload" : {
+      "get" : {
+        "description" : "This resources uses a generator to stream data to the client line by line. In comparison the payload resource sends to the client at once. The lines request parameter can be used to specify the total number of lines to be returned and the delay parameter to specify the delay between each time. . Each line of text is about 512 bytes of data. ",
+        "operationId" : "streamload",
+        "tags" : [ ],
+        "consumes" : [ "application/xml", "text/plain", "application/json" ],
+        "produces" : [ "application/json", "application/xml", "text/plain" ],
+        "parameters" : [ {
+          "description" : "Delay each line generation in secods.",
+          "required" : false,
+          "in" : "query",
+          "name" : "delay",
+          "type" : "string"
+        }, {
+          "description" : "How many lines of data to be returned.",
+          "required" : false,
+          "in" : "query",
+          "name" : "lines",
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/ip" : {
+      "get" : {
+        "description" : "Returns the IP address of the client. Can be used to check what is your public ip address.",
+        "operationId" : "GET ip",
+        "tags" : [ ],
+        "produces" : [ "plain/text", "application/json" ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/bus_stop/{stopName}" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "bus_stop",
+        "tags" : [ ],
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "description" : "The name of the bus stop.",
+          "required" : true,
+          "in" : "path",
+          "name" : "stopName",
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/payload" : {
+      "get" : {
+        "description" : "Responds with text data in plain, xml or json format. The lines and delay parameters can be used to specify how many lines of text to be sent and the total delay. Each line of text is about 512 bytes of data.",
+        "operationId" : "payload",
+        "tags" : [ ],
+        "consumes" : [ "application/xml", "text/plain", "application/json" ],
+        "produces" : [ "application/json", "application/xml", "text/plain" ],
+        "parameters" : [ {
+          "description" : "Delay response in secods.",
+          "required" : false,
+          "in" : "query",
+          "name" : "delay",
+          "type" : "string"
+        }, {
+          "description" : "How many lines of data to be returned.",
+          "required" : false,
+          "in" : "query",
+          "name" : "lines",
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/codes/{code}" : {
+      "get" : {
+        "description" : "Returns requested HTTP code, can delay the response and echo back some message.",
+        "operationId" : "GET codes",
+        "tags" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "description" : "How much time in seconds to delay response.",
+          "format" : "int32",
+          "required" : false,
+          "in" : "query",
+          "name" : "sleep",
+          "type" : "integer"
+        }, {
+          "description" : "The code to be returned.",
+          "required" : true,
+          "in" : "path",
+          "name" : "code",
+          "type" : "string"
+        }, {
+          "description" : "Message to be retruned.",
+          "required" : false,
+          "in" : "query",
+          "name" : "echo",
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      },
+      "post" : {
+        "description" : "Returns requested HTTP code, can delay the response and echo back some message.",
+        "operationId" : "POST codes",
+        "tags" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "description" : "How much time in seconds to delay response.",
+          "format" : "int32",
+          "required" : false,
+          "in" : "query",
+          "name" : "sleep",
+          "type" : "integer"
+        }, {
+          "description" : "The code to be returned.",
+          "required" : true,
+          "in" : "path",
+          "name" : "code",
+          "type" : "string"
+        }, {
+          "description" : "Message to be retruned.",
+          "required" : false,
+          "in" : "query",
+          "name" : "echo",
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "tags" : [ ],
+  "info" : {
+    "title" : "SUAG",
+    "description" : "SupportUnknown's API Grounds (SUAG) is a simple service for generating different HTTP response codes, types, and messages. It's useful in testing how your scripts and code deals with varying responses. It can also be used as an endpoint when testing API Gateways.",
+    "version" : "1.0",
+    "x-summary" : "SupportUnknown's API Grounds (SUAG)"
+  },
+  "x-axway" : {
+    "corsEnabled" : true,
+    "basePaths" : [ "" ],
+    "serviceType" : "rest",
+    "deprecated" : false,
+    "tags" : { },
+    "availableSDK" : { },
+    "customProperties" : { }
+  }
+}

@@ -1,0 +1,1 @@
+web: gunicorn suag:app --timeout 300
