@@ -40,6 +40,7 @@ def readme():
 api.add_resource(resources.retrunCode, '/codes/<int:code>')
 api.add_resource(resources.bus_stop, '/bus_stop/<string:busStop>')
 api.add_resource(resources.ip, '/ip')
+api.add_resource(resources.qrcode, '/qr')
 
 if __name__ == '__main__':
     app.run()
