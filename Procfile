@@ -1,1 +1,1 @@
-web: gunicorn suag:app --timeout 300
+web: gunicorn suag:app --workers 2 --threads 64 --timeout 300
