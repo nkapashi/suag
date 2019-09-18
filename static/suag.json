@@ -36,7 +36,7 @@
         "description" : "Returns the IP address of the client. Can be used to check what is your public ip address.",
         "operationId" : "GET ip",
         "tags" : [ ],
-        "produces" : [ "plain/text", "application/json" ],
+        "produces" : [ "text/plain", "application/json" ],
         "responses" : {
           "default" : {
             "description" : "successful operation"
