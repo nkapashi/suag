@@ -1,10 +1,9 @@
-from flask import Response, request
+from flask import Response, request, redirect
 from flask.helpers import make_response
 from flask_restful import Resource, reqparse
 from datetime import datetime
 from time import sleep
 import os
-import pyqrcode
 import random
 import string
 
@@ -64,10 +63,14 @@ class icap_test(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('string', type=str, required=False)
     parser.add_argument('block_with_header', type=str, required=False)
+    parser.add_argument('redirect', type=str, required=False)
+    
     
     @staticmethod
     def mk_response():
         args = icap_test.parser.parse_args()
+        if args.get('redirect'):
+            return redirect('testIcapFile.dat', code=302)
         arg_string = args.get('string')
         return_string = arg_string if arg_string else 'No return string specified'
         resp = Response(return_string, mimetype='text/plain', headers=None)
