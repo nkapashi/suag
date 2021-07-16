@@ -60,22 +60,17 @@ class bus_stop(Resource):
     def get(self, busStop):
         return bus_stop.ttArrive(busStop)
 
-class qrcode(Resource):
-    
-    url = os.environ.get('url') if os.environ.get('url') else 'https://suag-api.herokuapp.com'
+class icap_test(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('string', type=str, required=False)
     
     @staticmethod
-    def create_qr():
-        data = request.get_json(silent=True)
-        try:
-            message = data.get('Text')
-            qr_code = pyqrcode.create(message)
-            qr_codeFileName = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))+'.png'
-            qr_code.png('static/'+qr_codeFileName, scale=20, module_color=[0, 0, 0, 128], background=[0xff, 0xff, 0xff])
-            return {"url" : qrcode.url + '/' + qr_codeFileName}, 201
-        except Exception as e:
-            print(e)
-            return {"Error" : ""}, 500
-    
-    def post(self):
-        return qrcode.create_qr()
+    def mk_response():
+        args = retrunCode.parser.parse_args()
+        arg_string = agrs.get('string')
+        return_string = arg_string if arg_string else 'No return string specified'
+        resp = Response(return_string, mimetype='text/plain', headers=None)
+        resp.status_code = 200
+        return resp
+        
+        
