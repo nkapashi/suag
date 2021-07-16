@@ -66,8 +66,8 @@ class icap_test(Resource):
     
     @staticmethod
     def mk_response():
-        args = retrunCode.parser.parse_args()
-        arg_string = agrs.get('string')
+        args = icap_test.parser.parse_args()
+        arg_string = args.get('string')
         return_string = arg_string if arg_string else 'No return string specified'
         resp = Response(return_string, mimetype='text/plain', headers=None)
         resp.status_code = 200
