@@ -1,4 +1,5 @@
 from flask import Response, request
+from flask.helpers import make_response
 from flask_restful import Resource, reqparse
 from datetime import datetime
 from time import sleep
@@ -46,7 +47,6 @@ class retrunCode(Resource):
     def post(self, code):
         return retrunCode.resLogin(), code
 
-
 class bus_stop(Resource):
     
     @staticmethod
@@ -71,6 +71,10 @@ class icap_test(Resource):
         return_string = arg_string if arg_string else 'No return string specified'
         resp = Response(return_string, mimetype='text/plain', headers=None)
         resp.status_code = 200
+        return resp
+    
+    def get(self):
+        resp = icap_test.mk_response()
         return resp
         
         
