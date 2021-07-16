@@ -63,6 +63,7 @@ class bus_stop(Resource):
 class icap_test(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('string', type=str, required=False)
+    parser.add_argument('block_with_header', type=str, required=False)
     
     @staticmethod
     def mk_response():
@@ -71,6 +72,8 @@ class icap_test(Resource):
         return_string = arg_string if arg_string else 'No return string specified'
         resp = Response(return_string, mimetype='text/plain', headers=None)
         resp.status_code = 200
+        if args.get('block_with_header'):
+            resp.headers.extend({'ICAP-TEST': 'BLOCK'})
         return resp
     
     def get(self):
